@@ -1,0 +1,75 @@
+PROYECTO: Sistema de Gestión para Tienda de Electrónicos "STEREN STYLE"
+Tecnología: C# .NET MVC, Visual Studio Community 2022
+Base de datos: MySQL 
+Estilo: Moderno, tech, colores corporativos azul eléctrico y negro
+
+DOCUMENTACIÓN REQUERIDA:
+
+1. 📊 MAPA CONCEPTUAL DEL SISTEMA (Diagrama de alto impacto visual)
+   - Arquitectura MVC completa con flechas de flujo de datos
+   - Componentes: Models, Views, Controllers, DataContext, Repositories
+   - Servicios externos integrados (pagos, envíos, inventario)
+
+2. 🎨 UI/UX WIREFRAMES PROFESIONALES (6 pantallas críticas)
+   - Dashboard principal con métricas en tiempo real
+   - Catálogo de productos con filtros dinámicos
+   - Carrito de compras flotante
+   - Checkout progresivo (3 pasos)
+   - Panel administrativo de inventario
+   - Detalle de producto con especificaciones técnicas
+
+3. 🗄️ DISEÑO DE BASE DE DATOS (Modelo Entidad-Relación)
+   - Tablas: Usuarios, Productos, Categorías, Pedidos, DetallePedidos, Inventario
+   - Relaciones y llaves foráneas
+   - Índices sugeridos para rendimiento
+
+4. 📁 ESTRUCTURA DEL PROYECTO VISUAL
+   - Árbol de directorios completo
+   - Namespaces y responsabilidades
+   - Patrón Repository + UnitOfWork
+
+5. 💻 CÓDIGO BASE ESENCIAL (5 archivos clave)
+   - ProductController.cs (CRUD completo)
+   - ApplicationDbContext.cs
+   - Layout principal _Layout.cshtml con navbar responsivo
+   - Modelo Producto con validaciones
+   - Script de creación de base de datos
+
+6. 🚀 PLAN DE IMPLEMENTACIÓN (Cronograma visual)
+   - Fase 1: Configuración (Día 1)
+   - Fase 2: Modelado y BD (Día 2-3)
+   - Fase 3: Controladores y Vistas (Día 4-6)  
+   - Fase 4: Carrito y Pagos (Día 7-9)
+   - Fase 5: Pruebas y Despliegue (Día 10)
+
+7. 🎯 CARACTERÍSTICAS ESPECIALES DEL SISTEMA
+   - Búsqueda por código de producto y categoría
+   - Control de inventario en tiempo real
+   - Facturación electrónica integrada
+   - Módulo de garantías extendidas
+   - Chat de soporte en vivo
+
+8. 📈 MÉTRICAS Y KPIs DEL NEGOCIO
+   - Dashboard ejecutivo
+   - Reportes de ventas por categoría
+   - Alertas de inventario bajo
+   - Análisis de productos más vendidos
+
+FORMATO DE ENTREGA:
+- Documento único tipo "Technical Design Document" (TDD)
+- Diseño moderno con gradientes, sombras y tipografía clean
+- Código en bloques con sintaxis coloreada
+- Tablas comparativas y timelines visuales
+- Incluir mockups de alta fidelidad en estilo neomorphism
+- Que parezca documento de consultoría profesional
+
+EXTRAS:
+- Sugerencias de optimización para SEO en eCommerce
+- Checklist de seguridad (XSS, CSRF, SQL Injection)
+- Estrategia de caching para catálogo de productos
+```
+
+
+
+
+

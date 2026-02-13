@@ -1,0 +1,15 @@
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\bin\Debug\net9.0\ElectroStore.Infrastructure.deps.json
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\bin\Debug\net9.0\ElectroStore.Infrastructure.dll
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\bin\Debug\net9.0\ElectroStore.Infrastructure.pdb
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\bin\Debug\net9.0\ElectroStore.Core.dll
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\bin\Debug\net9.0\ElectroStore.Core.pdb
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ElectroStore.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ElectroStore.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ElectroStore.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ElectroStore.Infrastructure.AssemblyInfo.cs
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ElectroStore.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ElectroS.BD667AA2.Up2Date
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ElectroStore.Infrastructure.dll
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\refint\ElectroStore.Infrastructure.dll
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ElectroStore.Infrastructure.pdb
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Infrastructure\obj\Debug\net9.0\ref\ElectroStore.Infrastructure.dll

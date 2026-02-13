@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)file:///C:/Users/victo/Desktop/Lotos%20Technologies/martes%2010-02-2026/SCRUMVICF.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación SCRUM - Tienda Tecnología C# + MySQL</title>
+    <style>
+        :root {
+            --scrum-orange: #ff6b35;
+            --scrum-blue: #004e7c;
+            --scrum-green: #2ecc71;
+            --scrum-purple: #8e44ad;
+            --scrum-yellow: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--scrum-blue), #1a2980);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid var(--scrum-orange);
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .header h2 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .velocity-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: var(--scrum-green);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        .developer-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .dev-card {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px 25px;
+            overflow-y: auto;
+        }
+        
+        .main-content {
+            padding: 40px;
+            background: #f8fafc;
+            overflow-y: auto;
+        }
+        
+        .sprint-section {
+            margin-bottom: 50px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--scrum-orange);
+        }
+        
+        .sprint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eef2f7;
+        }
+        
+        .sprint-title {
+            font-size: 1.8rem;
+            color: var(--scrum-blue);
+            font-weight: 700;
+        }
+        
+        .sprint-duration {
+            background: var(--scrum-purple);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .task-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #eef2f7;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--scrum-blue);
+        }
+        
+        .task-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--scrum-orange);
+        }
+        
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .task-id {
+            background: var(--scrum-blue);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .task-estimate {
+            background: var(--scrum-green);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .task-title {
+            font-size: 1.2rem;
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .task-description {
+            color: #718096;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .task-tech {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .tech-tag {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .dependency {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--scrum-green);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 40px;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .metric-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .member-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--scrum-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .member-info h4 {
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .member-role {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        .setup-checklist {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .setup-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .setup-item:last-child {
+            border-bottom: none;
+        }
+        
+        .check-icon {
+            color: var(--scrum-green);
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 1100px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .task-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .burnup-chart {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .chart-title {
+            color: var(--scrum-blue);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .chart-container {
+            height: 300px;
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .day-marker {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 0 10px;
+        }
+        
+        .day-point {
+            width: 40px;
+            height: 40px;
+            background: var(--scrum-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+        
+        .day-label {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        
+        .blocker {
+            background: #fff5f5;
+            border: 2px solid #fed7d7;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        
+        .blocker-header {
+            color: #c53030;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .priority-high {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .priority-medium {
+            background: #feebc8;
+            color: #d69e2e;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .priority-low {
+            background: #c6f6d5;
+            color: #38a169;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .completion-badge {
+            background: var(--scrum-green);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .daily-standup {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .standup-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .velocity-factor {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+    <link rel="stylesheet" href="./Planificación SCRUM - Tienda Tecnología C# + MySQL_files/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="velocity-badge">VELOCIDAD 11x ⚡</div>
+            <h1><i class="fas fa-rocket"></i> PLANIFICACIÓN SCRUM ACELERADA</h1>
+            <h2>Tienda de Tecnología - C# ASP.NET MVC + MySQL</h2>
+            <div class="developer-info">
+                <div class="dev-card"><i class="fas fa-bolt"></i> <strong>Programador Senior:</strong> 12 años experiencia</div>
+                <div class="dev-card"><i class="fas fa-calendar"></i> <strong>Duración:</strong> 10 días intensivos</div>
+                <div class="dev-card"><i class="fas fa-code"></i> <strong>Tecnología:</strong> Visual Studio Community</div>
+                <div class="dev-card"><i class="fas fa-database"></i> <strong>Base de datos:</strong> MySQL 8.0</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title"><i class="fas fa-chart-line"></i> MÉTRICAS DEL PROYECTO</h3>
+                    <div class="metric-card">
+                        <div class="metric-value">10 <small>días</small></div>
+                        <div class="metric-label">Duración total</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">47</div>
+                        <div class="metric-label">Story Points totales</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">11x</div>
+                        <div class="metric-label">Factor de velocidad</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">85%</div>
+                        <div class="metric-label">Reducción tiempo estimado</div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title"><i class="fas fa-users"></i> EQUIPO</h3>
+                    <div class="team-member">
+                        <div class="member-avatar">VP</div>
+                        <div class="member-info">
+                            <h4>Victor Programador</h4>
+                            <div class="member-role">Full-Stack Dev (11x)</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">TC</div>
+                        <div class="member-info">
+                            <h4>Tu Compañero</h4>
+                            <div class="member-role">Scrum Master / PO</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title"><i class="fas fa-tools"></i> SETUP DÍA 0</h3>
+                    <ul class="setup-checklist">
+                        <li class="setup-item">
+                            <i class="fas fa-check-circle check-icon"></i>
+                            <span>Verificar VS Community instalado</span>
+                        </li>
+                        <li class="setup-item">
+                            <i class="fas fa-check-circle check-icon"></i>
+                            <span>MySQL 8.0 + Workbench</span>
+                        </li>
+                        <li class="setup-item">
+                            <i class="fas fa-check-circle check-icon"></i>
+                            <span>Git configurado y repo clonado</span>
+                        </li>
+                        <li class="setup-item">
+                            <i class="fas fa-check-circle check-icon"></i>
+                            <span>Pomelo EF Core instalado</span>
+                        </li>
+                        <li class="setup-item">
+                            <i class="fas fa-check-circle check-icon"></i>
+                            <span>Bootstrap 5 + jQuery</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title"><i class="fas fa-exclamation-triangle"></i> BLOQUEADORES</h3>
+                    <div class="blocker">
+                        <div class="blocker-header"><i class="fas fa-skull-crossbones"></i> CRÍTICO</div>
+                        <p>Sin conexión a internet para instalar paquetes NuGet</p>
+                    </div>
+                    <div class="blocker">
+                        <div class="blocler-header"><i class="fas fa-exclamation-circle"></i> MEDIO</div>
+                        <p>Configuración específica del entorno MySQL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <!-- DÍA 0: SETUP -->
+                <div class="sprint-section">
+                    <div class="sprint-header">
+                        <div class="sprint-title">DÍA 0 - SETUP Y ARQUITECTURA</div>
+                        <div class="sprint-duration">4 horas ⚡</div>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-001</span>
+                                <span class="task-estimate" title="Tiempo normal: 11h (11x más lento)">1h</span>
+                            </div>
+                            <h3 class="task-title">Configuración de Entorno</h3>
+                            <p class="task-description">
+                                Verificar instalaciones, configurar conexión a MySQL, 
+                                crear proyecto ASP.NET MVC, instalar paquetes esenciales.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">VS Community</span>
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">NuGet</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-002</span>
+                                <span class="task-estimate" title="Tiempo normal: 22h (11x más lento)">2h</span>
+                            </div>
+                            <h3 class="task-title">Arquitectura Base</h3>
+                            <p class="task-description">
+                                Configurar estructura de carpetas, DbContext con Pomelo EF,
+                                modelos base, conexión a base de datos MySQL.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">C# MVC</span>
+                                <span class="tech-tag">EF Core</span>
+                                <span class="tech-tag">Pomelo</span>
+                            </div>
+                            <div class="dependency">Depende: TASK-001</div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-003</span>
+                                <span class="task-estimate" title="Tiempo normal: 11h (11x más lento)">1h</span>
+                            </div>
+                            <h3 class="task-title">Setup Frontend</h3>
+                            <p class="task-description">
+                                Configurar Bootstrap 5, layout principal, menú de navegación,
+                                estructura responsive base.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">Bootstrap 5</span>
+                                <span class="tech-tag">Razor</span>
+                                <span class="tech-tag">CSS3</span>
+                            </div>
+                            <div class="dependency">Depende: TASK-001</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DÍA 1: AUTENTICACIÓN Y CATÁLOGO BASE -->
+                <div class="sprint-section">
+                    <div class="sprint-header">
+                        <div class="sprint-title">DÍA 1 - AUTENTICACIÓN Y CATÁLOGO BASE</div>
+                        <div class="sprint-duration">8 horas ⚡</div>
+                    </div>
+                    
+                    <div class="daily-standup">
+                        <h4 class="standup-title"><i class="fas fa-bullhorn"></i> STANDUP MAÑANA (8:00 AM)</h4>
+                        <p>Revisión de setup del día 0, definición de prioridades del día 1, asignación de tareas críticas.</p>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-101</span>
+                                <span class="task-estimate" title="Tiempo normal: 22h (11x más lento)">2h</span>
+                            </div>
+                            <h3 class="task-title">Sistema de Autenticación</h3>
+                            <p class="task-description">
+                                Implementar ASP.NET Identity adaptado a MySQL,
+                                controladores de login/registro, manejo de sesiones.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">ASP.NET Identity</span>
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">Cookies</span>
+                            </div>
+                            <div class="priority-high">CRÍTICO</div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-102</span>
+                                <span class="task-estimate" title="Tiempo normal: 33h (11x más lento)">3h</span>
+                            </div>
+                            <h3 class="task-title">Modelos de Productos y Categorías</h3>
+                            <p class="task-description">
+                                Crear modelos completos para productos electrónicos,
+                                categorías jerárquicas, especificaciones técnicas.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">EF Core</span>
+                                <span class="tech-tag">C# Models</span>
+                                <span class="tech-tag">MySQL</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-103</span>
+                                <span class="task-estimate" title="Tiempo normal: 33h (11x más lento)">3h</span>
+                            </div>
+                            <h3 class="task-title">CRUD Básico de Productos</h3>
+                            <p class="task-description">
+                                Controladores y vistas para crear, leer, actualizar y eliminar
+                                productos. Validaciones y manejo de imágenes.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">C# MVC</span>
+                                <span class="tech-tag">Razor Pages</span>
+                                <span class="tech-tag">Bootstrap</span>
+                            </div>
+                            <div class="dependency">Depende: TASK-102</div>
+                        </div>
+
+                        <!-- INSERTADO AUTOMÁTICAMENTE: TASK-104 -->
+                        <div class="task-card" style="border-left-color: #0055A4; border-left-width: 5px;">
+                            <div class="task-header">
+                                <span class="task-id">TASK-104</span>
+                                <span class="task-estimate">2h</span>
+                            </div>
+                            <h3 class="task-title">Arquitectura Responsive Completa</h3>
+                            <p class="task-description">
+                                DisplayModeProvider, layouts específicos por dispositivo, 
+                                helpers personalizados para imágenes responsivas, 
+                                media queries profesionales con 5 breakpoints.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">DisplayModes</span>
+                                <span class="tech-tag">Razor</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">Mobile-First</span>
+                            </div>
+                            <div class="priority-high" style="background: #e3f2fd; color: #0d47a1;">CRÍTICO - UX</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DÍA 2: CATÁLOGO AVANZADO -->
+                <div class="sprint-section">
+                    <div class="sprint-header">
+                        <div class="sprint-title">DÍA 2 - CATÁLOGO AVANZADO Y FILTROS</div>
+                        <div class="sprint-duration">9 horas ⚡</div>
+                    </div>
+                    
+                    <div class="daily-standup">
+                        <h4 class="standup-title"><i class="fas fa-bullhorn"></i> STANDUP MAÑANA (8:00 AM)</h4>
+                        <p>Revisión de progreso Día 1, ajuste de prioridades, enfoque en experiencia de usuario del catálogo.</p>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-201</span>
+                                <span class="task-estimate" title="Tiempo normal: 44h (11x más lento)">4h</span>
+                            </div>
+                            <h3 class="task-title">Sistema de Filtros Avanzados</h3>
+                            <p class="task-description">
+                                Filtros dinámicos por especificaciones técnicas, 
+                                búsqueda con Elasticsearch-like, paginación optimizada.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">LINQ</span>
+                                <span class="tech-tag">AJAX</span>
+                                <span class="tech-tag">jQuery</span>
+                            </div>
+                            <div class="priority-high">CRÍTICO</div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-202</span>
+                                <span class="task-estimate" title="Tiempo normal: 33h (11x más lento)">3h</span>
+                            </div>
+                            <h3 class="task-title">Vista Detallada de Productos</h3>
+                            <p class="task-description">
+                                Página completa con especificaciones técnicas, 
+                                imágenes galería, productos relacionados, reviews.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">Razor</span>
+                                <span class="tech-tag">Bootstrap 5</span>
+                                <span class="tech-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-203</span>
+                                <span class="task-estimate" title="Tiempo normal: 22h (11x más lento)">2h</span>
+                            </div>
+                            <h3 class="task-title">Carrito de Compras Básico</h3>
+                            <p class="task-description">
+                                Implementación de sesión para carrito, 
+                                agregar/eliminar productos, cálculo de totales.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">Session</span>
+                                <span class="tech-tag">C#</span>
+                                <span class="tech-tag">jQuery</span>
+                            </div>
+                        </div>
+
+                        <!-- INSERTADO AUTOMÁTICAMENTE: TASK-204 -->
+                        <div class="task-card" style="border-left-color: #0077B6; border-left-width: 5px;">
+                            <div class="task-header">
+                                <span class="task-id">TASK-204</span>
+                                <span class="task-estimate">2h</span>
+                            </div>
+                            <h3 class="task-title">Patrones Repository + UnitOfWork</h3>
+                            <p class="task-description">
+                                Implementar capa de abstracción para acceso a datos,
+                                desacoplar lógica de negocio de Entity Framework,
+                                facilitar testing y mantenibilidad.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">Repository Pattern</span>
+                                <span class="tech-tag">UnitOfWork</span>
+                                <span class="tech-tag">Dependency Injection</span>
+                            </div>
+                            <div class="priority-high" style="background: #e1f5fe; color: #0277bd;">ARQUITECTURA</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DÍA 3: PC BUILDER -->
+                <div class="sprint-section">
+                    <div class="sprint-header">
+                        <div class="sprint-title">DÍA 3 - PC BUILDER Y COMPATIBILIDAD</div>
+                        <div class="sprint-duration">10 horas ⚡</div>
+                    </div>
+                    
+                    <div class="daily-standup">
+                        <h4 class="standup-title"><i class="fas fa-bullhorn"></i> STANDUP MAÑANA (8:00 AM)</h4>
+                        <p>Revisión catálogo avanzado, planificación de PC Builder - funcionalidad estrella del proyecto.</p>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="completion-badge">FUNCIÓN ESTRELLA</div>
+                            <div class="task-header">
+                                <span class="task-id">TASK-301</span>
+                                <span class="task-estimate" title="Tiempo normal: 55h (11x más lento)">5h</span>
+                            </div>
+                            <h3 class="task-title">Motor de PC Builder</h3>
+                            <p class="task-description">
+                                Interfaz drag-and-drop, selección de componentes,
+                                validación de compatibilidad en tiempo real.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">AJAX</span>
+                                <span class="tech-tag">C# API</span>
+                            </div>
+                            <div class="priority-high">CRÍTICO</div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-302</span>
+                                <span class="task-estimate" title="Tiempo normal: 33h (11x más lento)">3h</span>
+                            </div>
+                            <h3 class="task-title">Algoritmo de Compatibilidad</h3>
+                            <p class="task-description">
+                                Lógica de validación de sockets, dimensiones,
+                                consumo energético, refrigeración.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">C# Logic</span>
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">JSON</span>
+                            </div>
+                            <div class="dependency">Depende: TASK-301</div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-303</span>
+                                <span class="task-estimate" title="Tiempo normal: 22h (11x más lento)">2h</span>
+                            </div>
+                            <h3 class="task-title">Guardado de Configuraciones</h3>
+                            <p class="task-description">
+                                Sistema para guardar builds en perfil de usuario,
+                                compartir configuraciones, recuperar historial.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">MySQL JSON</span>
+                                <span class="tech-tag">ASP.NET Identity</span>
+                            </div>
+                            <div class="dependency">Depende: TASK-301</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- GRÁFICO DE PROGRESO -->
+                <div class="burnup-chart">
+                    <h3 class="chart-title"><i class="fas fa-chart-line"></i> PROGRESIÓN ACELERADA (11x)</h3>
+                    <div class="chart-container">
+                        <!-- Representación visual del progreso -->
+                        <div style="display: flex; align-items: flex-end; height: 200px; margin-top: 50px; gap: 80px; justify-content: center;">
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: var(--scrum-orange); border-radius: 50%; margin: 0 auto 10px;"></div>
+                                <div style="height: 40px; background: var(--scrum-green); width: 40px; margin: 0 auto;"></div>
+                                <div class="day-label">Día 0</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: var(--scrum-orange); border-radius: 50%; margin: 0 auto 10px;"></div>
+                                <div style="height: 80px; background: var(--scrum-green); width: 40px; margin: 0 auto;"></div>
+                                <div class="day-label">Día 1</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: var(--scrum-orange); border-radius: 50%; margin: 0 auto 10px;"></div>
+                                <div style="height: 120px; background: var(--scrum-green); width: 40px; margin: 0 auto;"></div>
+                                <div class="day-label">Día 2</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: var(--scrum-orange); border-radius: 50%; margin: 0 auto 10px;"></div>
+                                <div style="height: 160px; background: var(--scrum-green); width: 40px; margin: 0 auto;"></div>
+                                <div class="day-label">Día 3</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: var(--scrum-blue); border-radius: 50%; margin: 0 auto 10px;"></div>
+                                <div style="height: 40px; background: #e2e8f0; width: 40px; margin: 0 auto;"></div>
+                                <div class="day-label">Día 4</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 40px; height: 40px; background: var(--scrum-blue); border-radius: 50%; margin: 0 auto 10px;"></div>
+                                <div style="height: 80px; background: #e2e8f0; width: 40px; margin: 0 auto;"></div>
+                                <div class="day-label">Día 5</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="day-marker">
+                        <div>Setup</div>
+                        <div>Auth + Catálogo</div>
+                        <div>Filtros Avanzados</div>
+                        <div>PC Builder</div>
+                        <div>Checkout</div>
+                        <div>Admin Panel</div>
+                    </div>
+                </div>
+                
+                <!-- DÍAS 4-5: CHECKOUT Y PAGOS -->
+                <div class="sprint-section">
+                    <div class="sprint-header">
+                        <div class="sprint-title">DÍAS 4-5 - CHECKOUT Y SISTEMA DE PAGOS</div>
+                        <div class="sprint-duration">18 horas ⚡</div>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-401</span>
+                                <span class="task-estimate" title="Tiempo normal: 66h (11x más lento)">6h</span>
+                            </div>
+                            <h3 class="task-title">Proceso de Checkout Completo</h3>
+                            <p class="task-description">
+                                Flujo de 4 pasos: dirección, envío, pago, confirmación.
+                                Validaciones en tiempo real, cálculo de impuestos.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">C# MVC</span>
+                                <span class="tech-tag">jQuery Validate</span>
+                                <span class="tech-tag">Bootstrap</span>
+                            </div>
+                            <div class="priority-high">CRÍTICO</div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-402</span>
+                                <span class="task-estimate" title="Tiempo normal: 55h (11x más lento)">5h</span>
+                            </div>
+                            <h3 class="task-title">Integración de Pagos</h3>
+                            <p class="task-description">
+                                Stripe/PayPal sandbox, manejo de webhooks,
+                                estados de pago, reintentos automáticos.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">Stripe API</span>
+                                <span class="tech-tag">Webhooks</span>
+                                <span class="tech-tag">SSL</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-403</span>
+                                <span class="task-estimate" title="Tiempo normal: 44h (11x más lento)">4h</span>
+                            </div>
+                            <h3 class="task-title">Gestión de Órdenes</h3>
+                            <p class="task-description">
+                                Sistema de órdenes con estados, tracking,
+                                emails de confirmación, historial de compras.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">SMTP</span>
+                                <span class="tech-tag">Enum States</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-404</span>
+                                <span class="task-estimate" title="Tiempo normal: 33h (11x más lento)">3h</span>
+                            </div>
+                            <h3 class="task-title">Sistema de Inventario</h3>
+                            <p class="task-description">
+                                Reducción automática de stock, alertas de inventario bajo,
+                                manejo de productos agotados.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">MySQL Triggers</span>
+                                <span class="tech-tag">C# Services</span>
+                            </div>
+                        </div>
+
+                        <!-- INSERTADO AUTOMÁTICAMENTE: TASK-405 -->
+                        <div class="task-card" style="border-left-color: #2E7D32; border-left-width: 5px;">
+                            <div class="task-header">
+                                <span class="task-id">TASK-405</span>
+                                <span class="task-estimate">1.5h</span>
+                            </div>
+                            <h3 class="task-title">Optimización MySQL + Diagrama ER</h3>
+                            <p class="task-description">
+                                Crear diagrama entidad-relación completo, 
+                                índices compuestos para búsquedas frecuentes,
+                                migraciones iniciales con Seed Data.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">MySQL Workbench</span>
+                                <span class="tech-tag">Indexing</span>
+                                <span class="tech-tag">EF Migrations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DÍAS 6-7: PANEL ADMINISTRATIVO -->
+                <div class="sprint-section">
+                    <div class="sprint-header">
+                        <div class="sprint-title">DÍAS 6-7 - PANEL ADMIN Y REPORTES</div>
+                        <div class="sprint-duration">14 horas ⚡</div>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-501</span>
+                                <span class="task-estimate" title="Tiempo normal: 55h (11x más lento)">5h</span>
+                            </div>
+                            <h3 class="task-title">Dashboard Administrativo</h3>
+                            <p class="task-description">
+                                Panel con métricas en tiempo real, gestión de productos,
+                                manejo de órdenes, control de usuarios.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">AdminLTE</span>
+                                <span class="tech-tag">Chart.js</span>
+                                <span class="tech-tag">C# MVC</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-502</span>
+                                <span class="task-estimate" title="Tiempo normal: 44h (11x más lento)">4h</span>
+                            </div>
+                            <h3 class="task-title">Sistema de Reportes</h3>
+                            <p class="task-description">
+                                Reportes de ventas, productos más vendidos,
+                                análisis de clientes, exportación a Excel/PDF.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">LINQ</span>
+                                <span class="tech-tag">EPPlus</span>
+                                <span class="tech-tag">MySQL Views</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-503</span>
+                                <span class="task-estimate" title="Tiempo normal: 33h (11x más lento)">3h</span>
+                            </div>
+                            <h3 class="task-title">Gestión Multi-sucursal</h3>
+                            <p class="task-description">
+                                Sistema de inventario por ubicación,
+                                transferencias entre sucursales, roles por tienda.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">ASP.NET Roles</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-504</span>
+                                <span class="task-estimate" title="Tiempo normal: 22h (11x más lento)">2h</span>
+                            </div>
+                            <h3 class="task-title">API para Proveedores</h3>
+                            <p class="task-description">
+                                Endpoints REST para sincronización de inventario,
+                                actualización de precios automática.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">Web API</span>
+                                <span class="tech-tag">JWT</span>
+                                <span class="tech-tag">Swagger</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DÍAS 8-10: OPTIMIZACIÓN Y DEPLOY -->
+                <div class="sprint-section">
+                    <div class="sprint-header">
+                        <div class="sprint-title">DÍAS 8-10 - OPTIMIZACIÓN, TESTING Y DEPLOY</div>
+                        <div class="sprint-duration">12 horas ⚡</div>
+                    </div>
+                    
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-601</span>
+                                <span class="task-estimate" title="Tiempo normal: 44h (11x más lento)">4h</span>
+                            </div>
+                            <h3 class="task-title">Optimización de Rendimiento</h3>
+                            <p class="task-description">
+                                Caché Redis, compresión de imágenes,
+                                optimización de queries MySQL, minificación de assets.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">Redis</span>
+                                <span class="tech-tag">MySQL Indexing</span>
+                                <span class="tech-tag">Bundling</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-602</span>
+                                <span class="task-estimate" title="Tiempo normal: 33h (11x más lento)">3h</span>
+                            </div>
+                            <h3 class="task-title">Testing y QA</h3>
+                            <p class="task-description">
+                                Testing de integración, pruebas de carga,
+                                validación de compatibilidad cross-browser.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">xUnit</span>
+                                <span class="tech-tag">Selenium</span>
+                                <span class="tech-tag">JMeter</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-603</span>
+                                <span class="task-estimate" title="Tiempo normal: 33h (11x más lento)">3h</span>
+                            </div>
+                            <h3 class="task-title">Deployment y DevOps</h3>
+                            <p class="task-description">
+                                Configuración de IIS/nginx, SSL certificate,
+                                backup automático MySQL, monitoreo.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">IIS</span>
+                                <span class="tech-tag">Let's Encrypt</span>
+                                <span class="tech-tag">GitHub Actions</span>
+                            </div>
+                        </div>
+                        
+                        <div class="task-card">
+                            <div class="task-header">
+                                <span class="task-id">TASK-604</span>
+                                <span class="task-estimate" title="Tiempo normal: 22h (11x más lento)">2h</span>
+                            </div>
+                            <h3 class="task-title">Documentación Final</h3>
+                            <p class="task-description">
+                                Manual de usuario, documentación técnica,
+                                guía de mantenimiento, README del proyecto.
+                            </p>
+                            <div class="task-tech">
+                                <span class="tech-tag">Markdown</span>
+                                <span class="tech-tag">Swagger UI</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, var(--scrum-green), #27ae60); color: white; border-radius: 15px;">
+                        <h2 style="margin-bottom: 20px;">🎯 TOTAL: 10 DÍAS - TIENDA COMPLETA</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 15px;">
+                            <strong>47 Story Points</strong> • <strong>75 horas efectivas</strong> • <strong>Velocidad 11x</strong>
+                        </p>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">
+                            Equivalente a 3-4 meses de trabajo de un equipo estándar
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animación de progreso
+        document.querySelectorAll('.task-estimate').forEach(estimate => {
+            const hours = parseInt(estimate.textContent);
+            const normalTime = hours * 11; // 11x más lento
+            estimate.title = `Tiempo normal: ${normalTime}h (11x más lento)`;
+        });
+        
+        // Simular progreso diario
+        const progressFill = document.createElement('div');
+        progressFill.className = 'progress-fill';
+        progressFill.style.width = '10%';
+        document.querySelector('.progress-bar').appendChild(progressFill);
+        
+        // Actualizar progreso cada 2 segundos (simulación)
+        let progress = 10;
+        setInterval(() => {
+            if (progress < 100) {
+                progress += 5;
+                progressFill.style.width = `${progress}%`;
+            }
+        }, 2000);
+        
+        // Highlight tareas críticas
+        document.querySelectorAll('.priority-high').forEach(critical => {
+            critical.parentElement.style.borderColor = '#ff6b35';
+            critical.parentElement.style.boxShadow = '0 0 0 3px rgba(255, 107, 53, 0.1)';
+        });
+        
+        // Mostrar/ocultar detalles de tareas
+        document.querySelectorAll('.task-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('task-id') && 
+                    !e.target.classList.contains('task-estimate')) {
+                    this.classList.toggle('expanded');
+                }
+            });
+        });
+        
+        // Actualizar fecha actual
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.querySelector('.header h2').innerHTML += `<br><small>Planificación generada: ${today.toLocaleDateString('es-ES', options)}</small>`;
+    </script>
+
+</body></html>

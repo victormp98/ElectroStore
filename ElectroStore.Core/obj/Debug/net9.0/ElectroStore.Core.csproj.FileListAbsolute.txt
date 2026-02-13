@@ -1,0 +1,12 @@
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\bin\Debug\net9.0\ElectroStore.Core.deps.json
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\bin\Debug\net9.0\ElectroStore.Core.dll
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\bin\Debug\net9.0\ElectroStore.Core.pdb
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\ElectroStore.Core.csproj.AssemblyReference.cache
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\ElectroStore.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\ElectroStore.Core.AssemblyInfoInputs.cache
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\ElectroStore.Core.AssemblyInfo.cs
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\ElectroStore.Core.csproj.CoreCompileInputs.cache
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\ElectroStore.Core.dll
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\refint\ElectroStore.Core.dll
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\ElectroStore.Core.pdb
+C:\Users\Rick\Documents\LotosTechnologies\Electrostore\ElectroStore.Core\obj\Debug\net9.0\ref\ElectroStore.Core.dll

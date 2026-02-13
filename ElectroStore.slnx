@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ElectroStore.Core/ElectroStore.Core.csproj" />
+  <Project Path="ElectroStore.Infrastructure/ElectroStore.Infrastructure.csproj" />
+  <Project Path="ElectroStore.Web/ElectroStore.Web.csproj" />
+</Solution>

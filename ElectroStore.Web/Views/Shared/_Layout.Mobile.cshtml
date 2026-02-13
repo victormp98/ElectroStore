@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>@ViewData["Title"] - ElectroStore (Mobile)</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ElectroStore.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        body { padding-bottom: 70px; }
+        .mobile-header { background: #004e7c; color: white; padding: 10px; position: sticky; top: 0; z-index: 1000; }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #dee2e6; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; }
+        .nav-item-mobile { text-align: center; color: #6c757d; text-decoration: none; font-size: 0.8rem; }
+        .nav-item-mobile.active { color: #004e7c; font-weight: bold; }
+        .nav-item-mobile i { display: block; font-size: 1.2rem; margin-bottom: 2px; }
+    </style>
+</head>
+<body>
+    <header class="mobile-header d-flex justify-content-between align-items-center">
+        <h5 class="m-0"><i class="fas fa-bolt"></i> ElectroStore</h5>
+        <div>
+            <a href="#" class="text-white me-3"><i class="fas fa-search"></i></a>
+            <a href="#" class="text-white"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </header>
+
+    <div class="container mt-3">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <nav class="bottom-nav">
+        <a asp-controller="Home" asp-action="Index" class="nav-item-mobile active">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="#" class="nav-item-mobile">
+            <i class="fas fa-list"></i> Categories
+        </a>
+        <a href="#" class="nav-item-mobile">
+            <i class="fas fa-heart"></i> Wishlist
+        </a>
+        <a href="#" class="nav-item-mobile">
+            <i class="fas fa-user"></i> Profile
+        </a>
+    </nav>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
